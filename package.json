@@ -1,0 +1,12 @@
+{
+  "name": "chitaem-so-vkusom",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node preview.mjs",
+    "build": "node build.mjs",
+    "test": "node --test book.test.mjs vercel.test.mjs"
+  },
+  "engines": { "node": ">=22" }
+}
