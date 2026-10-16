@@ -1,0 +1,36 @@
+body{min-height:100svh;background:var(--forest) url('/assets/paper.webp') repeat;background-blend-mode:multiply}
+.thanks-header,.thanks-footer{width:min(1120px,calc(100% - 64px));margin-inline:auto}
+.thanks-header{padding-block:28px}
+.thanks-header .brand{font-size:24px}
+.thanks-spread{width:min(1120px,calc(100% - 64px));margin:12px auto 0;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:clamp(28px,4vw,64px);padding:clamp(28px,4.5vw,64px);background:var(--paper) url('/assets/paper-flat-v3.webp') center/cover;border-radius:12px;box-shadow:0 18px 48px #11190d55}
+.thanks-message{min-width:0}
+.thanks-message h1{font-size:clamp(38px,4.4vw,60px);line-height:1.13}
+.thanks-intro{font-family:Prata,Georgia,serif;font-size:21px;line-height:1.5;margin-block:24px 16px}
+.thanks-message>p:not(.thanks-intro){max-width:42ch}
+.thanks-actions{display:flex;align-items:flex-start;flex-direction:column;gap:12px;margin-top:26px}
+.copy-link{padding:4px 0;border:0;background:transparent;text-decoration:underline;text-underline-offset:5px;color:var(--action);font-size:15px;cursor:pointer;min-height:32px}
+.copy-link[hidden]{display:none}
+.copy-status:empty{display:none}
+.copy-status{font-size:14px}
+.thanks-message .thanks-help{font-size:14px;line-height:1.6;margin-top:16px}
+.meeting-details{margin-top:28px;padding-top:22px;border-top:1px solid #75571866;font-size:15px}
+.meeting-details p+p{margin-top:8px}
+.thanks-picture{padding:12px 12px 18px;background:#fffaf0;box-shadow:0 12px 24px #232f2026;transform:rotate(2deg);border-radius:10px}
+.thanks-picture img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px}
+.thanks-picture figcaption{font-family:Prata,Georgia,serif;font-size:16px;line-height:1.5;text-align:center;padding-top:16px}
+.thanks-footer{display:flex;justify-content:space-between;gap:20px;padding-block:24px 32px;color:var(--paper);font-size:14px;flex-wrap:wrap}
+.thanks-footer :focus-visible,.thanks-header :focus-visible{outline-color:var(--gold)}
+@media(max-width:700px){
+ .thanks-header,.thanks-footer,.thanks-spread{width:calc(100% - 32px)}
+ .thanks-header{padding-block:22px 12px}
+ .thanks-header .brand{font-size:19px;gap:12px}
+ .thanks-header .brand img{width:50px;height:38px}
+ .thanks-spread{grid-template-columns:1fr;gap:32px;padding:28px 22px;margin-top:12px}
+ .thanks-message h1{font-size:clamp(34px,9vw,46px)}
+ .thanks-intro{font-size:19px;margin-top:20px}
+ .thanks-message>p{font-size:16px}
+ .thanks-actions,.thanks-actions .cta{width:100%}
+ .thanks-picture{margin:0 4px 8px;transform:rotate(1deg)}
+ .thanks-picture img{aspect-ratio:5/4}
+ .thanks-footer{font-size:13px}
+}

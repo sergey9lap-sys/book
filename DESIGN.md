@@ -1,0 +1,69 @@
+---
+name: Читаем со вкусом
+description: Книжные путешествия, бумага и настоящий общий стол
+colors:
+  forest: "#363e2e"
+  ink: "#232f20"
+  paper: "#f6f0e2"
+  gold: "#e2b960"
+  action: "#852844"
+rounded:
+  action: "10px"
+components:
+  button-primary:
+    backgroundColor: "{colors.action}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.action}"
+    width: "288px"
+    height: "56px"
+---
+
+## Overview
+
+Existing visual authority is public/styles.css and the approved book landing.
+The thank-you page extends this world, not a new brand. A paper invitation sits
+on the forest background with the original gold mark and existing France illustration.
+
+## Colors
+
+Forest surrounds paper; ink carries reading. Gold belongs to the original brand.
+Raspberry is reserved for the next action; utility links remain understated.
+
+## Typography
+
+Prata for titles and short editorial phrases; Manrope for copy and controls.
+Self-hosted assets are inherited from the landing. Bind short Russian prepositions
+without creating oversized nonbreaking groups on a narrow screen.
+
+## Layout
+
+The thank-you route has an 1120px maximum paper spread, message left and image
+right. At 700px and below it becomes a single column, action before image.
+No fixed-height clipping; meeting information and footer remain reachable by scroll.
+
+## Elevation & Depth
+
+Existing raster paper texture and a soft downward shadow create material depth.
+The illustration rests inside a slightly turned paper photo mount.
+
+## Shapes
+
+CTA retains the shared geometry. The spread and photo edges have modest,
+consistent curves; do not approximate the original logo.
+
+## Components
+
+One primary Telegram invitation, ordinary current-window link without payment
+parameters. Copy invitation is a secondary utility, progressive enhancement only.
+No automatic redirect or fake verified-payment state. Keyboard focus is visible.
+
+## Do's and Don'ts
+
+- Preserve existing approved landing content, assets and invoice amounts.
+- Do not treat a public thank-you URL as authorization or payment confirmation.
+- Do not automatically send users into Telegram while they are reading.
+- Keep the copy fallback and no-referrer policy.
+
+Reviewed 16.10.2026: fresh review disposition ship at the new-page scope;
+desktop and overlapping 320px mobile captures validated. Physical iPhone checkout
+remains for the user's end-to-end test; no payment was conducted by the agent.

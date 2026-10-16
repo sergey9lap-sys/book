@@ -10,6 +10,16 @@ const italyRaw=await readFile(path.join(root,'italy/index.html'),'utf8');
 const main=mainRaw.replaceAll('\u00a0',' ').replaceAll('\u2011','-');
 const italy=italyRaw.replaceAll('\u00a0',' ').replaceAll('\u2011','-');
 const tactileStyles=await readFile(path.join(root,'tactile-album-v6.css'),'utf8');
+test('thank-you page preserves brand and offers a clean Telegram invitation',async()=>{
+ const thanks=await readFile(path.join(root,'thanks/index.html'),'utf8');
+ assert.match(thanks,/noindex,nofollow/);
+ assert.match(thanks,/name="referrer" content="no-referrer"/);
+ assert.match(thanks,/https:\/\/t\.me\/\+r2B8mm7bSXhlY2Ni/);
+ assert.match(thanks,/Присоединиться к группе/);
+ assert.match(thanks,/\/assets\/passport-mark.webp/);
+ assert.doesNotMatch(thanks,/Оплата прошла успешно|Оплата подтверждена|window.location/);
+ for(const asset of ['thanks/thanks.css','thanks/thanks.js'])assert.ok((await stat(path.join(root,asset))).size>0);
+});
 test('all seven source sections remain, with two explicitly requested additions',()=>{
  for(const id of ['format','next','passport','memories','faq','join'])assert.ok(main.includes(`id="${id}"`));
  assert.equal((main.match(/<section\b/g)||[]).length,9);
