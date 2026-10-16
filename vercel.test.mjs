@@ -11,7 +11,7 @@ test('standalone Vercel build serves site at domain root and preserves old route
  assert.match(italy,/<base href="\/">/);
  assert.doesNotMatch(italy,/<base href="\/book\//);
  const main=await readFile(new URL('./public/index.html',import.meta.url),'utf8');
- assert.match(main,/35Vu3FnlHEaj5C-T3T898Q/);
- assert.match(main,/jz5rphMXq0uM4AYTCUEX2w/);
+ assert.match(main,/YtN0redYt022EoCzqlEBPw/);
+ assert.match(main,/jbHHe-Psk025PwLUsjQlYA/);
  assert.equal((main.match(/method="get" target="_blank" rel="noopener noreferrer"/g)||[]).length,3);
 });

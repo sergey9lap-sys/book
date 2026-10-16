@@ -106,7 +106,7 @@ test('October 15 confirmed meeting, FAQ, tariff copy and offer are present',()=>
 test('payment URLs are fixed public invoices and no browser success can grant paid access',async()=>{
  const {paymentOptions,invoiceUrl}=await import('./public/payments.mjs');
  assert.equal(Object.keys(paymentOptions).length,3);
- assert.equal(invoiceUrl('test'),'https://auth.robokassa.ru/merchant/Invoice/jz5rphMXq0uM4AYTCUEX2w');
+ assert.equal(invoiceUrl('test'),'https://auth.robokassa.ru/merchant/Invoice/jbHHe-Psk025PwLUsjQlYA');
  assert.equal(invoiceUrl('unexpected'),null);
  const script=await readFile(path.join(root,'payments.mjs'),'utf8');
  assert.doesNotMatch(script,/SignatureValue|Password1|postMessage|tusim812|localStorage/);
@@ -122,7 +122,7 @@ test('payment URLs are fixed public invoices and no browser success can grant pa
   if(key!=='test')assert.match(form[2],/Принимаю условия <a[^>]+13hUKjdMwv9-sbd__mDnOi31UsIn6giex/);
   else assert.doesNotMatch(form[2],/Принимаю условия/);
  }
- assert.equal(invoiceUrl('solo'),'https://auth.robokassa.ru/merchant/Invoice/DcPY1nBgJka3xOSTkgmzDg');
- assert.equal(invoiceUrl('duo'),'https://auth.robokassa.ru/merchant/Invoice/35Vu3FnlHEaj5C-T3T898Q');
+ assert.equal(invoiceUrl('solo'),'https://auth.robokassa.ru/merchant/Invoice/91rcii5kLEyeqCbbDxNGnA');
+ assert.equal(invoiceUrl('duo'),'https://auth.robokassa.ru/merchant/Invoice/YtN0redYt022EoCzqlEBPw');
  assert.equal(new Set(forms.map(m=>m[1].match(/action="([^"]+)"/)[1])).size,3);
 });

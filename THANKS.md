@@ -17,3 +17,9 @@ meta referrer=no-referrer не передаёт адрес возврата ст
 
 После публикации SuccessUrl2 трёх используемых счетов направляется на
 https://vkusknig.ru/thanks/, методом GET. Сам экран Robokassa не изменяется.
+
+Robokassa при сохранении изменила идентификаторы платёжных ссылок; в HTML,
+payments.mjs и тестах обновлены все три значения. Цены и описания не изменялись.
+Solo: 91rcii5kLEyeqCbbDxNGnA; duo: YtN0redYt022EoCzqlEBPw;
+test: jbHHe-Psk025PwLUsjQlYA. Не возвращать старые ссылки: они могут хранить
+предыдущий адрес возврата в Telegram.
