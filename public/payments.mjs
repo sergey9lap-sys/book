@@ -1,8 +1,7 @@
 // Public invoices supplied by the organizer; no payment keys, amounts or paid-state logic.
 export const paymentOptions=Object.freeze({
   solo:{id:'91rcii5kLEyeqCbbDxNGnA',title:'Билет на одного · 4 990 Р',test:false},
-  duo:{id:'YtN0redYt022EoCzqlEBPw',title:'Путешествие на двоих · 8 980 Р',test:false},
-  test:{id:'jbHHe-Psk025PwLUsjQlYA',title:'Проверка оплаты · 10 Р',test:true}
+  duo:{id:'YtN0redYt022EoCzqlEBPw',title:'Путешествие на двоих · 8 980 Р',test:false}
 });
 export const invoiceUrl=key=>paymentOptions[key]?`https://auth.robokassa.ru/merchant/Invoice/${paymentOptions[key].id}`:null;
 // Native required-checkbox forms in index.html open a new top-level tab with noopener noreferrer.

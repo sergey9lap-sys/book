@@ -24,7 +24,7 @@ test('all seven source sections remain, with two explicitly requested additions'
  for(const id of ['format','next','passport','memories','faq','join'])assert.ok(main.includes(`id="${id}"`));
  assert.equal((main.match(/<section\b/g)||[]).length,9);
  assert.match(main,/hero-flat-v3.webp/);assert.match(main,/pass[ps]ort-original.webp/);
- assert.match(main,/Читать все книги необязательно/);assert.match(main,/Домашнего задания тоже нет/);
+ assert.match(main,/Читать все книги необязательно/);assert.doesNotMatch(main,/class="reading-note"/);
 });
 test('live ingredients keep uniform titles and physical passport explanation',()=>{
  for(const title of ['Книги','Еда и напитки','Атмосфера','Люди и разговоры'])assert.ok(main.includes(`<h3>${title}</h3>`));
@@ -97,23 +97,23 @@ test('mobile album is a complete separate object with chapter-local counters',as
 
 test('October 15 confirmed meeting, FAQ, tariff copy and offer are present',()=>{
  for(const value of ['Сбор к 18:30','Старт в 19:00','Киевская, 12','CXBvQYiT','4 990 Р','8 980 Р','Путешествие на двоих','…приду без компании?','…не знаю, моё ли это вообще?','13hUKjdMwv9-sbd__mDnOi31UsIn6giex'])assert.ok(main.includes(value),value);
- assert.match(main,/Это не билет на встречу/);assert.match(main,/При оплате спишется 10 Р/);
- assert.equal((main.match(/data-payment="/g)||[]).length,3);
+ assert.doesNotMatch(main,/test-ticket|data-payment="test"|Проверка оплаты|При оплате спишется 10 Р|jbHHe-Psk025PwLUsjQlYA/);
+ assert.equal((main.match(/data-payment="/g)||[]).length,2);
  assert.doesNotMatch(main,/<dialog|<iframe|₽/);
  assert.match(main,/review-1.mp4/);assert.match(main,/review-2.mp4/);assert.match(main,/review-3.mp4/);
 });
 
 test('payment URLs are fixed public invoices and no browser success can grant paid access',async()=>{
  const {paymentOptions,invoiceUrl}=await import('./public/payments.mjs');
- assert.equal(Object.keys(paymentOptions).length,3);
- assert.equal(invoiceUrl('test'),'https://auth.robokassa.ru/merchant/Invoice/jbHHe-Psk025PwLUsjQlYA');
+ assert.equal(Object.keys(paymentOptions).length,2);
+ assert.equal(invoiceUrl('test'),null);
  assert.equal(invoiceUrl('unexpected'),null);
  const script=await readFile(path.join(root,'payments.mjs'),'utf8');
  assert.doesNotMatch(script,/SignatureValue|Password1|postMessage|tusim812|localStorage/);
  assert.doesNotMatch(script,/showModal|createElement|addEventListener|window\.open/);
  const forms=[...main.matchAll(/<form\b([^>]+)>([\s\S]*?)<\/form>/g)];
- assert.equal(forms.length,3);
- for(const [key,form] of ['solo','duo','test'].map(key=>[key,forms.find(m=>m[1].includes(`data-payment="${key}"`))])){
+ assert.equal(forms.length,2);
+ for(const [key,form] of ['solo','duo'].map(key=>[key,forms.find(m=>m[1].includes(`data-payment="${key}"`))])){
   assert.ok(form,key);assert.ok(form[1].includes(`action="${invoiceUrl(key)}"`));
   assert.match(form[1],/method="get" target="_blank" rel="noopener noreferrer"/);
   assert.match(form[2],/<input type="checkbox" required>/);
@@ -124,5 +124,5 @@ test('payment URLs are fixed public invoices and no browser success can grant pa
  }
  assert.equal(invoiceUrl('solo'),'https://auth.robokassa.ru/merchant/Invoice/91rcii5kLEyeqCbbDxNGnA');
  assert.equal(invoiceUrl('duo'),'https://auth.robokassa.ru/merchant/Invoice/YtN0redYt022EoCzqlEBPw');
- assert.equal(new Set(forms.map(m=>m[1].match(/action="([^"]+)"/)[1])).size,3);
+ assert.equal(new Set(forms.map(m=>m[1].match(/action="([^"]+)"/)[1])).size,2);
 });
