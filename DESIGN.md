@@ -35,6 +35,19 @@ Prata for titles and short editorial phrases; Manrope for copy and controls.
 Self-hosted assets are inherited from the landing. Bind short Russian prepositions
 without creating oversized nonbreaking groups on a narrow screen.
 
+17.10.2026: the hero invitation “Путешествуем по странам…” uses Prata 400,
+matching the ingredients above it, with explicit black text. Its wording and the
+original book image are unchanged. The future-meeting placeholder in #join is
+replaced by the supplied Google Forms embed and a direct new-tab fallback.
+The external form retains its own Google typography and currently requires sign-in;
+do not claim anonymous submission or restyle its cross-origin content.
+The iframe's white background and 8px inner rounding belong to the Google form
+surface, not a new CTA style. Exact black for this hero phrase is user-requested.
+Source mapping: all nine existing sections, original media, two payment forms and
+offer links remain; only #join's disabled placeholder is replaced. Local automated
+tests: 15 passed. Mobile 320/390 and desktop 1440 checked; no horizontal overflow.
+No registration was submitted, no Google settings changed, no publication confirmed.
+
 ## Layout
 
 The thank-you route has an 1120px maximum paper spread, message left and image

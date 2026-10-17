@@ -35,8 +35,20 @@ test('live ingredients keep uniform titles and physical passport explanation',()
 test('only Italy is past; future France and Russia have dates but no fabricated sales',()=>{
  assert.match(main,/Уже путешествовали/);assert.match(main,/2026-10-24/);assert.match(main,/2026-11-28/);
  assert.match(main,/Дальше в маршруте/);assert.match(main,/Билет на одного/);
- assert.match(main,/контакты пока не собираются/);assert.doesNotMatch(main,/оплата недоступна/);
+ assert.doesNotMatch(main,/контакты пока не собираются|оплата недоступна/);
  assert.match(italy,/<meta name="robots" content="noindex,nofollow">/);
+});
+
+test('future-meeting registration embeds supplied Google form with a direct fallback, no placeholder fields',async()=>{
+ const id='1FAIpQLSeWvfa2zeQvG4KUQlcw7T54-AH2HTMhLYiFvwkTL3tmXQvr3A';
+ const join=main.match(/<section id="join"[\s\S]*?<\/section>/)[0];
+ assert.ok(join.includes(`/forms/d/e/${id}/viewform?embedded=true`));
+ assert.ok(join.includes(`/forms/d/e/${id}/viewform" target="_blank"`));
+ assert.match(join,/<iframe[^>]+title="[^"]+"[^>]+loading="lazy"/);
+ assert.doesNotMatch(join,/country-choices|country-status|disabled|подключим после|скоро откроется|publish-editor/);
+ const css=await readFile(path.join(root,'registration-v18.css'),'utf8');
+ assert.match(css,/\.hero-description\{font-family:Prata,Georgia,serif;font-weight:400;color:#000\}/);
+ assert.match(main,/Путешествуем по странам,<br> не покупая билет на самолёт/);
 });
 test('Italy route fragments stay on Italy and all ten supplied photos remain represented',()=>{
  assert.match(italy,/href="italy\/#album"/);assert.match(italy,/href="italy\/#main"/);
@@ -99,7 +111,9 @@ test('October 15 confirmed meeting, FAQ, tariff copy and offer are present',()=>
  for(const value of ['Сбор к 18:30','Старт в 19:00','Киевская, 12','CXBvQYiT','4 990 Р','8 980 Р','Путешествие на двоих','…приду без компании?','…не знаю, моё ли это вообще?','13hUKjdMwv9-sbd__mDnOi31UsIn6giex'])assert.ok(main.includes(value),value);
  assert.doesNotMatch(main,/test-ticket|data-payment="test"|Проверка оплаты|При оплате спишется 10 Р|jbHHe-Psk025PwLUsjQlYA/);
  assert.equal((main.match(/data-payment="/g)||[]).length,2);
- assert.doesNotMatch(main,/<dialog|<iframe|₽/);
+ assert.doesNotMatch(main,/<dialog|₽/);
+ const frames=[...main.matchAll(/<iframe\b[^>]+src="([^"]+)"/g)];
+ assert.equal(frames.length,1);assert.ok(frames[0][1].startsWith('https://docs.google.com/forms/d/e/'));
  assert.match(main,/review-1.mp4/);assert.match(main,/review-2.mp4/);assert.match(main,/review-3.mp4/);
 });
 

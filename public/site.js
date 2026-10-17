@@ -1,9 +1,5 @@
 import { russianTypography } from './typography.mjs';
 
-document.querySelectorAll('input[name="country"]').forEach(input=>input.addEventListener('change',()=>{
-  document.getElementById('country-status').textContent=russianTypography(`Ваш выбор — ${input.value}. Он не отправляется организатору: предзапись ещё не открыта.`);
-}));
-
 const reel = document.querySelector('.photo-reel');
 if (reel) {
   const previous = document.querySelector('[data-gallery-prev]');
