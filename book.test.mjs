@@ -49,8 +49,19 @@ test('future-meeting registration uses one styled new-tab link, no embedded form
  const css=await readFile(path.join(root,'registration-v18.css'),'utf8');
  assert.match(css,/\.hero-description\{font-family:Prata,Georgia,serif;font-weight:400;color:#000\}/);
  assert.doesNotMatch(css,/registration-frame|height:800px|height:780px/);
- assert.match(main,/registration-v18\.css\?v=19/);
+ assert.match(main,/registration-v18\.css\?v=20/);
  assert.match(main,/Путешествуем по странам,<br> не покупая билет на самолёт/);
+});
+
+test('mobile registration precedes club info while desktop keeps club left and form right',async()=>{
+ const join=main.match(/<section id="join"[\s\S]*?<\/section>/)[0];
+ assert.ok(join.indexOf('class="join-copy"')<join.indexOf('class="join-page paper join-form"'));
+ assert.ok(join.indexOf('class="join-page paper join-form"')<join.indexOf('class="club-note"'));
+ assert.equal((join.match(/class="club-note"/g)||[]).length,1);
+ assert.match(join,/Книжный клуб по подписке — следующая глава проекта/);
+ const css=await readFile(path.join(root,'registration-v18.css'),'utf8');
+ assert.match(css,/grid-template-areas:"intro form" "club form"/);
+ assert.match(css,/@media\(max-width:700px\)\{\.join\{grid-template-areas:"intro" "form" "club"\}/);
 });
 test('Italy route fragments stay on Italy and all ten supplied photos remain represented',()=>{
  assert.match(italy,/href="italy\/#album"/);assert.match(italy,/href="italy\/#main"/);

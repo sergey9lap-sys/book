@@ -1,11 +1,14 @@
 /* The short invitation uses the same editorial face as the ingredients above it. */
 .hero-description{font-family:Prata,Georgia,serif;font-weight:400;color:#000}
-.join{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.join{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-areas:"intro form" "club form";row-gap:0}
+.join-copy{grid-area:intro}
+.join>.club-note{grid-area:club}
+.join-form{grid-area:form}
 .join-copy,.join-form{min-width:0}
 .join-form{padding:42px}
 .join-form>p{font-size:17px;line-height:1.6}
 .join-form .cta{margin-top:24px}
 .join-form>.small{font-size:14px;margin-top:16px}
-@media(max-width:900px){.join{grid-template-columns:1fr}.join-form{width:100%;max-width:680px;justify-self:center}}
-@media(max-width:700px){.join-form{padding:26px 0}.join-form h3,.join-form>p{margin-inline:22px}}
+@media(max-width:900px){.join{grid-template-columns:1fr;grid-template-areas:"intro" "club" "form";row-gap:32px}.join>.club-note{margin-top:0}.join-form{width:100%;max-width:680px;justify-self:center}}
+@media(max-width:700px){.join{grid-template-areas:"intro" "form" "club"}.join-form{padding:26px 0}.join-form h3,.join-form>p{margin-inline:22px}}
 @media(max-width:360px){.hero-description{top:72.5vw;line-height:1.2}}

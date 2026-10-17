@@ -52,6 +52,11 @@ published and checked live before this follow-up; button-only deployment is pend
 
 ## Layout
 
+17.10.2026 follow-up: at <=700px, #join reads introduction, participant form card,
+then club subscription information. At desktop the club text stays below the intro
+in the left column and the form stays on the right. At 701–900px the previous
+single-column intro/club/form order is retained. No copy or form URL changed.
+
 The thank-you route has an 1120px maximum paper spread, message left and image
 right. At 700px and below it becomes a single column, action before image.
 No fixed-height clipping; meeting information and footer remain reachable by scroll.
