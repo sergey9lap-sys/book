@@ -39,15 +39,17 @@ test('only Italy is past; future France and Russia have dates but no fabricated 
  assert.match(italy,/<meta name="robots" content="noindex,nofollow">/);
 });
 
-test('future-meeting registration embeds supplied Google form with a direct fallback, no placeholder fields',async()=>{
+test('future-meeting registration uses one styled new-tab link, no embedded form or placeholder fields',async()=>{
  const id='1FAIpQLSeWvfa2zeQvG4KUQlcw7T54-AH2HTMhLYiFvwkTL3tmXQvr3A';
  const join=main.match(/<section id="join"[\s\S]*?<\/section>/)[0];
- assert.ok(join.includes(`/forms/d/e/${id}/viewform?embedded=true`));
  assert.ok(join.includes(`/forms/d/e/${id}/viewform" target="_blank"`));
- assert.match(join,/<iframe[^>]+title="[^"]+"[^>]+loading="lazy"/);
- assert.doesNotMatch(join,/country-choices|country-status|disabled|подключим после|скоро откроется|publish-editor/);
+ assert.match(join,/<a class="cta" data-registration="external"[^>]+target="_blank" rel="noopener noreferrer">Заполнить анкету участника<\/a>/);
+ assert.equal((join.match(/docs\.google\.com\/forms/g)||[]).length,1);
+ assert.doesNotMatch(join,/<iframe|embedded=true|registration-frame|country-choices|country-status|disabled|подключим после|скоро откроется|publish-editor/);
  const css=await readFile(path.join(root,'registration-v18.css'),'utf8');
  assert.match(css,/\.hero-description\{font-family:Prata,Georgia,serif;font-weight:400;color:#000\}/);
+ assert.doesNotMatch(css,/registration-frame|height:800px|height:780px/);
+ assert.match(main,/registration-v18\.css\?v=19/);
  assert.match(main,/Путешествуем по странам,<br> не покупая билет на самолёт/);
 });
 test('Italy route fragments stay on Italy and all ten supplied photos remain represented',()=>{
@@ -112,8 +114,7 @@ test('October 15 confirmed meeting, FAQ, tariff copy and offer are present',()=>
  assert.doesNotMatch(main,/test-ticket|data-payment="test"|Проверка оплаты|При оплате спишется 10 Р|jbHHe-Psk025PwLUsjQlYA/);
  assert.equal((main.match(/data-payment="/g)||[]).length,2);
  assert.doesNotMatch(main,/<dialog|₽/);
- const frames=[...main.matchAll(/<iframe\b[^>]+src="([^"]+)"/g)];
- assert.equal(frames.length,1);assert.ok(frames[0][1].startsWith('https://docs.google.com/forms/d/e/'));
+ assert.doesNotMatch(main,/<iframe\b/);
  assert.match(main,/review-1.mp4/);assert.match(main,/review-2.mp4/);assert.match(main,/review-3.mp4/);
 });
 
