@@ -1,0 +1,13 @@
+.photo-zoom{cursor:zoom-in;touch-action:manipulation}
+.photo-zoom:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.photo-viewer{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:76px 24px 24px;border:0;background:rgb(18 24 15 / .96);color:var(--paper);overflow:auto;overscroll-behavior:contain}
+.photo-viewer::backdrop{background:rgb(18 24 15 / .8)}
+.photo-viewer[open]{display:grid;place-items:center}
+.photo-viewer figure{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:100%;margin:0}
+.photo-viewer figure img{display:block;width:auto;height:auto;max-width:100%;max-height:calc(100dvh - 180px);object-fit:contain;border-radius:8px}
+.photo-viewer figcaption{font:400 16px/1.5 Manrope,Arial,sans-serif;text-align:center;max-width:65ch;color:var(--paper)}
+.photo-viewer-close{position:fixed;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));display:grid;place-items:center;width:48px;height:48px;padding:12px;border:1px solid var(--paper);border-radius:50%;background:var(--forest);color:var(--paper);cursor:pointer;z-index:1}
+.photo-viewer-close svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.photo-viewer-close:focus-visible{outline-color:var(--gold)}
+@media(max-width:700px){.photo-viewer{padding:76px 16px 24px}.photo-viewer figcaption{font-size:15px}}
+@media(hover:hover) and (pointer:fine){.photo-viewer-close:hover{background:var(--ink)}}

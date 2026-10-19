@@ -10,6 +10,17 @@ const italyRaw=await readFile(path.join(root,'italy/index.html'),'utf8');
 const main=mainRaw.replaceAll('\u00a0',' ').replaceAll('\u2011','-');
 const italy=italyRaw.replaceAll('\u00a0',' ').replaceAll('\u2011','-');
 const tactileStyles=await readFile(path.join(root,'tactile-album-v6.css'),'utf8');
+
+test('photo viewer keeps original images, uses larger sources and accessible dismissal',async()=>{
+ const script=await readFile(path.join(root,'photo-viewer.js'),'utf8');
+ const css=await readFile(path.join(root,'photo-viewer.css'),'utf8');
+ for(const html of [mainRaw,italyRaw])assert.match(html,/photo-viewer.js\?v=21/);
+ assert.match(script,/showModal\(\)/);assert.match(script,/aria-haspopup/);
+ assert.match(script,/prefers-reduced-motion/);assert.match(script,/preventScroll:true/);
+ assert.match(script,/'cancel'/);assert.match(script,/-1200/);
+ assert.match(css,/object-fit:contain/);assert.match(css,/width:48px;height:48px/);
+ for(const n of ['89','90','91','92','93','94','95','96','97','98'])assert.ok((await stat(path.join(root,`assets/live/italy-${n}-1200.webp`))).size>0);
+});
 test('thank-you page preserves brand and offers a clean Telegram invitation',async()=>{
  const thanks=await readFile(path.join(root,'thanks/index.html'),'utf8');
  assert.match(thanks,/noindex,nofollow/);
@@ -111,7 +122,7 @@ test('prepositions are bound on both pages and dynamic captions use the same typ
   assert.equal(russianTypography(text),text);
  }
  assert.doesNotMatch(mainRaw,/report-film-note|Лучше один раз увидеть|Два коротких видео с первой встречи/);
- assert.match(mainRaw,/type="module" src="site.js\?v=9"/);
+ assert.match(mainRaw,/type="module" src="site.js\?v=21"/);
 });
 test('mobile album is a complete separate object with chapter-local counters',async()=>{
  assert.equal((mainRaw.match(/srcset="assets\/mobile-ring-album-v9.webp"/g)||[]).length,6);

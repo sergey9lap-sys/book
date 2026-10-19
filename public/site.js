@@ -67,7 +67,7 @@ if (album) {
     const target=single?i*2:i;const direction=target>page?1:-1;page=target;render(direction,e.detail!==0);
   }));
   album.addEventListener('keydown',e=>{
-    if(e.target.closest('video,a,button'))return;
+    if(e.target.closest('video,a,button,[role="button"]'))return;
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();move(e.key==='ArrowRight'?1:-1,false);}
   });
   let touch;
@@ -77,7 +77,12 @@ if (album) {
   },{passive:true});
   album.addEventListener('touchend',e=>{
     if(!touch)return;const dx=e.changedTouches[0].clientX-touch.x,dy=e.changedTouches[0].clientY-touch.y;
-    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5)move(dx<0?1:-1,true);touch=null;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5){
+      const photo=e.target.closest('.photo-zoom');
+      if(photo)photo.dataset.suppressZoomUntil=String(Date.now()+400);
+      move(dx<0?1:-1,true);
+    }
+    touch=null;
   },{passive:true});
   mobile.addEventListener('change',()=>{page=mobile.matches?page*2:Math.floor(page/2);single=mobile.matches;render();});
   album.before(navigation,chapters);

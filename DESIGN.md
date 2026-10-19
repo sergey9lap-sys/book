@@ -20,6 +20,18 @@ components:
 
 ## Overview
 
+19.10.2026: photo viewer extends the existing photos without replacing assets,
+copy, layout, form or payment links. Applies to main-page live photos, passport,
+France illustration and Italy archive; excludes logos, decorative album covers,
+hero art and video posters. The native modal dialog uses a dark forest scrim
+rgb(18 24 15 / .96), backdrop .8, 8px image radius, 48px close control. Originals
+are displayed uncropped; larger 1200 variants load only on request. Entry uses
+280ms scale(.96) and opacity with existing --ease; exit 180ms. Keyboard is instant,
+reduced motion uses opacity only. Escape, background click, focus restoration and
+scroll lock are implemented. Main page checked at desktop and 390px; 17 tests pass.
+The image without src lives only in a closed dialog and receives src before opening.
+Aeza deployment is a separate manual update after pushing the repository.
+
 Existing visual authority is public/styles.css and the approved book landing.
 The thank-you page extends this world, not a new brand. A paper invitation sits
 on the forest background with the original gold mark and existing France illustration.
